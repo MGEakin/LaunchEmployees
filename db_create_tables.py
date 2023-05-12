@@ -80,7 +80,6 @@ sql = """CREATE TABLE employees ( \
         first_name VARCHAR(255), \
         last_name VARCHAR(255), \
         email_address VARCHAR(255), \
-        studio_id INT, \
         discipline_id INT, \
         role_id INT, \
         title_id INT, \

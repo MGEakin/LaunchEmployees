@@ -51,6 +51,14 @@ mycursor.execute(sql)
 sql = "INSERT INTO titles (title) VALUES ('Director, Test & Test Automation')"
 mycursor.execute(sql)
 
+print("----------INSERT cost_alignment------------------")
+sql = "INSERT INTO cost_alignment (cost_alignment) VALUES ('Launch US')"
+mycursor.execute(sql)
+sql = "INSERT INTO cost_alignment (cost_alignment) VALUES ('Launch India')"
+mycursor.execute(sql)
+sql = "INSERT INTO cost_alignment (cost_alignment) VALUES ('Launch LATAM')"
+mycursor.execute(sql)
+
 mydb.commit()
 
 print("----------INSERT disciplines------------------")
@@ -69,6 +77,7 @@ val = [
   ("DevSecOps", 6),
   ("Site Reliability", 6),
   ("Test & Test Automation", 6),
+  ("Test & Test Automation - India", 6),
   ("Architecture & Development", 6),
   ("Technology Strategy", 7),
   ("Solution Architecture", 7),
