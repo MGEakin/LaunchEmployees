@@ -8,6 +8,7 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
+mycursor.execute("DROP DATABASE testing")
 mycursor.execute("CREATE DATABASE testing")
 
 mycursor.execute("SHOW DATABASES")
