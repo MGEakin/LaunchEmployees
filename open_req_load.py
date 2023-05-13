@@ -1,5 +1,6 @@
 from openpyxl import load_workbook
 import mysql.connector
+import datetime
 
 mydb = mysql.connector.connect(
   host="localhost",
@@ -33,6 +34,33 @@ for sheet in wb:
         print('+++++++++++++++++' + CompanyName + ' added to the db+++++++++++++++')
 
         mydb.commit()
+
+# second, read through sheets and pull all job titles.
+# if new, add to db
+for sheet in wb:
+    print(sheet.title)
+    for row in sheet.values:
+        print(row)
+        if row[0] is not None:
+            if isinstance(row[0], datetime.datetime):
+                print('type ==  datetime.datetime')
+            else:
+                print('type !=  none')
+                JobTitle_raw = row[0]
+                if "Job Title" in JobTitle_raw:
+                    JobTitle = JobTitle_raw[11:]
+                    print('JobTitle==' + JobTitle)
+
+                    sql = "SELECT * FROM titles WHERE title = %s"
+                    title_name = (JobTitle,)
+                    mycursor.execute(sql, title_name)
+                    myresult = mycursor.fetchall()
+                    if len(myresult) == 0:
+                        sql_client = "INSERT INTO titles (title) VALUES ('" + JobTitle + "')"
+                        mycursor.execute(sql_client)
+                        print('+++++++++++++++++' + JobTitle + ' added to the db+++++++++++++++')
+
+                        mydb.commit()
 
     # for row in sheet.values:
     #     if sheet.title != "Overview_1":
