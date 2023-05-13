@@ -20,15 +20,15 @@ ws = wb.active
 # first, read through Overview and create new req record
 # if new, add to db
 for sheet in wb:
-    print(sheet.title)
+    # print(sheet.title)
     if sheet.title == 'Overview_1':
         client_id = 0
         for row in sheet.values:
-            print(row)
+            # print(row)
             if row[4] is not None:
                 JobID = row[4]
                 if JobID != 'Job ID':
-                    print('JobID =' + str(JobID))
+                    # print('JobID =' + str(JobID))
                     CompanyName = row[0]
                     Priority = row[1]
                     ProjectStage = row[2]
@@ -48,7 +48,7 @@ for sheet in wb:
                             for x in myresult:
                                 client_id = x[0]
 
-                        print('client_id:' + str(client_id))
+                        # print('client_id:' + str(client_id))
 
                         title_id = 0
                         sql = "SELECT title_id FROM titles WHERE title = %s"
@@ -56,7 +56,7 @@ for sheet in wb:
                         mycursor.execute(sql, title_name)
                         myresult = mycursor.fetchall()
                         for x in myresult:
-                            print('title_id:' + str(x[0]))
+                            # print('title_id:' + str(x[0]))
                             title_id = x[0]
                             sql = """INSERT INTO requisitions ( \
                                             job_id, \
@@ -78,7 +78,7 @@ for sheet in wb:
             if row[4] is not None:
                 JobID = row[4]
                 if JobID != 'Job ID':
-                    print('JobID =' + str(JobID))
+                    # print('JobID =' + str(JobID))
                     DateAdded = row[0]
                     JobContact = row[2]
                     City = row[5]
@@ -95,13 +95,13 @@ for sheet in wb:
                         x = JobContact.split("  ")
                     first_name = x[0]
                     last_name = x[1]
-                    print('found JobContact:' + first_name + ' ' + last_name)
+                    # print('found JobContact:' + first_name + ' ' + last_name)
                     sql = "SELECT employee_id FROM employees WHERE first_name = %s AND last_name = %s"
                     title_name = (first_name, last_name)
                     mycursor.execute(sql, title_name)
                     myresult = mycursor.fetchall()
                     for x in myresult:
-                        print('contact_id:' + str(x[0]))
+                        # print('contact_id:' + str(x[0]))
                         contact_id = x[0]
 
                     sql = """UPDATE requisitions SET \

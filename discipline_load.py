@@ -15,9 +15,9 @@ wb = load_workbook('Test and Test Automation(March 25).xlsx')
 ws = wb.active
 
 for sheet in wb:
-    print(sheet.title)
+    # print(sheet.title)
     for row in sheet.values:
-        print(row)
+        # print(row)
         ResourceEmployeeID = row[0]
         ResourceFirstName = row[1]
         ResourceLastName = row[2]

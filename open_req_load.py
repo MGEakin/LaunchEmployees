@@ -23,7 +23,7 @@ for sheet in wb:
     # print(sheet.title)
     CompanyName_raw = sheet['A5'].value
     CompanyName = CompanyName_raw[14:]
-    print('CompanyName =' + CompanyName)
+    # print('CompanyName =' + CompanyName)
     sql = "SELECT * FROM clients WHERE client_name = %s"
     client_name = (CompanyName, )
     mycursor.execute(sql, client_name)
@@ -45,11 +45,11 @@ for sheet in wb:
             if isinstance(row[0], datetime.datetime):
                 print('type ==  datetime.datetime')
             else:
-                print('type !=  none')
+                # print('type !=  none')
                 JobTitle_raw = row[0]
                 if "Job Title" in JobTitle_raw:
                     JobTitle = JobTitle_raw[11:]
-                    print('JobTitle==' + JobTitle)
+                    # print('JobTitle==' + JobTitle)
 
                     sql = "SELECT * FROM titles WHERE title = %s"
                     title_name = (JobTitle,)
@@ -65,17 +65,17 @@ for sheet in wb:
 # third, read through sheets and pull all recruiters.
 # if new, add to db
 for sheet in wb:
-    print(sheet.title)
+    # print(sheet.title)
     if sheet.title == 'Overview_1':
         for row in sheet.values:
-            print(row)
+            # print(row)
             if row[6] is not None:
                 Recruiter_raw = row[6]
                 if Recruiter_raw != 'name' and Recruiter_raw != 'Focused Recruiter(s)':
                     x = Recruiter_raw.split(" ")
                     first_name = x[0]
                     last_name = x[1]
-                    print('found recruiter:' + first_name + ' ' + last_name)
+                    # print('found recruiter:' + first_name + ' ' + last_name)
                     sql = "SELECT * FROM employees WHERE first_name = %s AND last_name = %s"
                     title_name = (first_name, last_name)
                     mycursor.execute(sql, title_name)
@@ -94,22 +94,22 @@ for sheet in wb:
 # Lastly, read through sheets and pull all job contacts.
 # if new, add to db
 for sheet in wb:
-    print(sheet.title)
+    # print(sheet.title)
     if sheet.title != 'Overview_1':
         for row in sheet.values:
-            print(row)
+            # print(row)
             if row[2] is not None:
                 Recruiter_raw = row[2]
                 if Recruiter_raw != 'Job Contact':
                     x = Recruiter_raw.split(" ")
-                    print(x)
+                    # print(x)
                     first_name = x[0]
                     last_name = x[1]
                     if last_name == '':
                         x = Recruiter_raw.split("  ")
                     first_name = x[0]
                     last_name = x[1]
-                    print('found recruiter:' + first_name + ' ' + last_name)
+                    # print('found recruiter:' + first_name + ' ' + last_name)
                     sql = "SELECT * FROM employees WHERE first_name = %s AND last_name = %s"
                     title_name = (first_name, last_name)
                     mycursor.execute(sql, title_name)
