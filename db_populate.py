@@ -36,28 +36,33 @@ sql = "INSERT INTO roles (role) VALUES ('Software Development Engineer in Test')
 mycursor.execute(sql)
 
 print("----------INSERT titles------------------")
-sql = "INSERT INTO titles (title) VALUES ('Quality Assurance Engineer')"
-mycursor.execute(sql)
-sql = "INSERT INTO titles (title) VALUES ('Senior Quality Assurance Engineer')"
-mycursor.execute(sql)
-sql = "INSERT INTO titles (title) VALUES ('Software Development Engineer in Test')"
-mycursor.execute(sql)
-sql = "INSERT INTO titles (title) VALUES ('Senior Software Development Engineer in Test')"
-mycursor.execute(sql)
-sql = "INSERT INTO titles (title) VALUES ('Manager, Test & Test Automation')"
-mycursor.execute(sql)
-sql = "INSERT INTO titles (title) VALUES ('Principal, Test & Test Automation')"
-mycursor.execute(sql)
-sql = "INSERT INTO titles (title) VALUES ('Director, Test & Test Automation')"
-mycursor.execute(sql)
+sql = "INSERT INTO titles (title) VALUES (%s)"
+val = [
+  ('Associate Recruiter', ),
+  ('Recruiter', ),
+  ('Sr Technical Recruiter', ),
+  ('Senior Recruiter', ),
+  ('Manager, Recruiting', ),
+  ('Managing Director, Mexico', ),
+  ('Quality Assurance Engineer', ),
+  ('Senior Quality Assurance Engineer', ),
+  ('Software Development Engineer in Test',),
+  ('Senior Software Development Engineer in Test', ),
+  ('Manager, Test & Test Automation', ),
+  ('Principal, Test & Test Automation', ),
+  ('Director, Test & Test Automation',)
+]
+mycursor.executemany(sql, val)
 
 print("----------INSERT cost_alignment------------------")
-sql = "INSERT INTO cost_alignment (cost_alignment) VALUES ('Launch US')"
-mycursor.execute(sql)
-sql = "INSERT INTO cost_alignment (cost_alignment) VALUES ('Launch India')"
-mycursor.execute(sql)
-sql = "INSERT INTO cost_alignment (cost_alignment) VALUES ('Launch LATAM')"
-mycursor.execute(sql)
+sql = "INSERT INTO cost_alignment (cost_alignment) VALUES (%s)"
+val = [
+  ("Launch US", ),
+  ("Launch India", ),
+  ("Launch LATAM",)
+]
+
+mycursor.executemany(sql, val)
 
 mydb.commit()
 
