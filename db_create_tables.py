@@ -27,51 +27,26 @@ sql = """CREATE TABLE studios (studio_id INT AUTO_INCREMENT PRIMARY KEY, \
         studio VARCHAR(255))"""
 mycursor.execute(sql)
 
-# sql = """CREATE TABLE employee_studio ( \
-#         employee_id INT PRIMARY KEY FOREIGN KEY REFERENCES employees(employee_id), \
-#         studio_id INT PRIMARY KEY FOREIGN KEY REFERENCES studios(studio_id)"""
-# mycursor.execute(sql)
-
 print("----------CREATE disciplines------------------")
 sql = """CREATE TABLE disciplines (discipline_id INT AUTO_INCREMENT PRIMARY KEY, \
         discipline VARCHAR(255))"""
 mycursor.execute(sql)
-
-# sql = """CREATE TABLE employee_discipline ( \
-#         employee_id INT PRIMARY KEY FOREIGN KEY REFERENCES employees(employee_id), \
-#         discipline_id INT PRIMARY KEY FOREIGN KEY REFERENCES disciplines(discipline_id)"""
-# mycursor.execute(sql)
 
 print("----------CREATE titles------------------")
 sql = """CREATE TABLE titles (title_id INT AUTO_INCREMENT PRIMARY KEY, \
         title VARCHAR(255))"""
 mycursor.execute(sql)
 
-# sql = """CREATE TABLE employee_title ( \
-#         employee_id INT PRIMARY KEY FOREIGN KEY REFERENCES employees(employee_id), \
-#         title_id INT PRIMARY KEY FOREIGN KEY REFERENCES titles(title_id)"""
-# mycursor.execute(sql)
-
 print("----------CREATE roles------------------")
 sql = """CREATE TABLE roles (role_id INT AUTO_INCREMENT PRIMARY KEY, \
         role VARCHAR(255))"""
 mycursor.execute(sql)
-
-# sql = """CREATE TABLE employee_role ( \
-#         employee_id INT PRIMARY KEY FOREIGN KEY REFERENCES employees(employee_id), \
-#         role_id INT PRIMARY KEY FOREIGN KEY REFERENCES roles(role_id)"""
-# mycursor.execute(sql)
 
 print("----------CREATE cost_alignment------------------")
 sql = """CREATE TABLE cost_alignment ( \
         cost_alignment_id INT AUTO_INCREMENT PRIMARY KEY, \
         cost_alignment VARCHAR(255))"""
 mycursor.execute(sql)
-
-# sql = """CREATE TABLE employee_cost_alignment ( \
-#         employee_id INT PRIMARY KEY FOREIGN KEY REFERENCES employees(employee_id), \
-#         cost_alignment_id INT PRIMARY KEY FOREIGN KEY REFERENCES cost_alignment(cost_alignment_id)"""
-# mycursor.execute(sql)
 
 print("----------CREATE employees------------------")
 sql = """CREATE TABLE employees ( \
@@ -98,10 +73,6 @@ mycursor.execute(sql)
 sql = "ALTER TABLE studios ADD FOREIGN KEY (studioLead) REFERENCES employees(employee_id)"
 mycursor.execute(sql)
 
-# sql = """ALTER TABLE studios \
-#         ADD studio_id INT"""
-# mycursor.execute(sql)
-
 sql = """ALTER TABLE disciplines ADD COLUMN studio_id INT"""
 mycursor.execute(sql)
 
@@ -113,6 +84,24 @@ mycursor.execute(sql)
 
 sql = "ALTER TABLE disciplines ADD FOREIGN KEY (disciplineLead) REFERENCES employees(employee_id)"
 mycursor.execute(sql)
+
+print("----------CREATE company------------------")
+sql = """CREATE TABLE clients ( \
+        client_id INT AUTO_INCREMENT PRIMARY KEY, \
+        client_name VARCHAR(255))"""
+mycursor.execute(sql)
+
+print("----------CREATE requisition------------------")
+sql = """CREATE TABLE requisitions ( \
+        job_id INT PRIMARY KEY, \
+        client_id INT, \
+        date_added DATETIME, \
+        openings INT)"""
+mycursor.execute(sql)
+
+sql = "ALTER TABLE requisitions ADD FOREIGN KEY (client_id) REFERENCES clients(client_id)"
+mycursor.execute(sql)
+
 
 mydb.commit()
 
