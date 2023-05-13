@@ -85,7 +85,7 @@ mycursor.execute(sql)
 sql = "ALTER TABLE disciplines ADD FOREIGN KEY (disciplineLead) REFERENCES employees(employee_id)"
 mycursor.execute(sql)
 
-print("----------CREATE company------------------")
+print("----------CREATE clients------------------")
 sql = """CREATE TABLE clients ( \
         client_id INT AUTO_INCREMENT PRIMARY KEY, \
         client_name VARCHAR(255))"""
@@ -96,12 +96,50 @@ sql = """CREATE TABLE requisitions ( \
         job_id INT PRIMARY KEY, \
         client_id INT, \
         date_added DATETIME, \
-        openings INT)"""
+        priority VARCHAR(255), \
+        project_stage VARCHAR(255), \
+        openings INT, \
+        job_contact INT, \
+        job_title INT, \
+        city VARCHAR(255), \
+        candidates_screened INT, \
+        client_submittals INT, \
+        client_interviews INT, \
+        notes VARCHAR(255), \
+        FOREIGN KEY (job_contact) REFERENCES employees(employee_id), \
+        FOREIGN KEY (job_title) REFERENCES titles(title_id), \
+        FOREIGN KEY (client_id) REFERENCES clients(client_id))"""
 mycursor.execute(sql)
 
-sql = "ALTER TABLE requisitions ADD FOREIGN KEY (client_id) REFERENCES clients(client_id)"
-mycursor.execute(sql)
+# sql = "ALTER TABLE requisitions ADD FOREIGN KEY (client_id) REFERENCES clients(client_id)"
+# mycursor.execute(sql)
 
+# print("----------CREATE req_recruiter------------------")
+# sql = """CREATE TABLE req_recruiter ( \
+#         job_id INT PRIMARY KEY, \
+#         recruiter_id INT PRIMARY KEY, \
+#         FOREIGN KEY (job_id) REFERENCES requisitions(job_id), \
+#         FOREIGN KEY (recruiter_id) REFERENCES employees(employee_id), \
+#         client_name VARCHAR(255))"""
+# mycursor.execute(sql)
+#
+# print("----------CREATE req_submittal------------------")
+# sql = """CREATE TABLE req_submittal ( \
+#         job_id INT PRIMARY KEY, \
+#         submitter_id INT PRIMARY KEY, \
+#         FOREIGN KEY (job_id) REFERENCES requisitions(job_id), \
+#         FOREIGN KEY (submitter_id) REFERENCES employees(employee_id), \
+#         client_name VARCHAR(255))"""
+# mycursor.execute(sql)
+#
+# print("----------CREATE req_interview------------------")
+# sql = """CREATE TABLE req_interview ( \
+#         job_id INT PRIMARY KEY, \
+#         interviewer_id INT PRIMARY KEY, \
+#         FOREIGN KEY (job_id) REFERENCES requisitions(job_id), \
+#         FOREIGN KEY (interviewer_id) REFERENCES employees(employee_id), \
+#         interview_round INT)"""
+# mycursor.execute(sql)
 
 mydb.commit()
 

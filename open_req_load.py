@@ -91,3 +91,36 @@ for sheet in wb:
 
                         mydb.commit()
 
+# Lastly, read through sheets and pull all job contacts.
+# if new, add to db
+for sheet in wb:
+    print(sheet.title)
+    if sheet.title != 'Overview_1':
+        for row in sheet.values:
+            print(row)
+            if row[2] is not None:
+                Recruiter_raw = row[2]
+                if Recruiter_raw != 'Job Contact':
+                    x = Recruiter_raw.split(" ")
+                    print(x)
+                    first_name = x[0]
+                    last_name = x[1]
+                    if last_name == '':
+                        x = Recruiter_raw.split("  ")
+                    first_name = x[0]
+                    last_name = x[1]
+                    print('found recruiter:' + first_name + ' ' + last_name)
+                    sql = "SELECT * FROM employees WHERE first_name = %s AND last_name = %s"
+                    title_name = (first_name, last_name)
+                    mycursor.execute(sql, title_name)
+                    myresult = mycursor.fetchall()
+                    if len(myresult) == 0:
+                        sql_client = "INSERT INTO employees (first_name, last_name) VALUES (%s, %s)"
+                        val = [
+                            (first_name, last_name)
+                        ]
+
+                        mycursor.executemany(sql_client, val)
+                        print('+++++++++++++++++' + first_name + ' ' + last_name + ' added to the db+++++++++++++++')
+
+                        mydb.commit()
