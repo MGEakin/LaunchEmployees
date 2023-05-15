@@ -1,0 +1,74 @@
+Test & Test Automation
+Software Quality Assurance Tools
+
+Programming languages
+* Java
+* C#
+* Python
+
+Frameworks
+* Robot
+* Talend
+* Tosca
+* Cucumber
+* SpecFlow
+* Cypress
+* Jest
+* TestNG
+* UFT
+* Selenium
+* Ghost Inspector
+* Valid8
+* Mable
+* TestRail
+
+Test Management
+* Azure DevOps Test Plans
+* qTest
+* XRAY
+
+Servers
+* Selenium Grid
+* Node JS
+
+Performance
+* LoadNinja
+* JMeter
+* WebLoad
+* LoadUI
+* LoadRunner
+* SmartMeter
+
+API
+* Postman
+* Ready API
+* Swagger
+
+UI
+* BrowserStack
+* LambdaTest
+* VisualTest (SmartBear)
+
+Test Environment Set-up
+
+Automated Regression Testing
+
+Others
+* Test Plan Creation
+* Test Plan Analysis
+* Test Design (Test Ideation)
+* Bug Analysis (Triage, isolation, reporting)
+* Recognizing Bugs
+* Test Reporting
+* Epistemology
+* Advise on Testability
+* Test Strategy
+* Test Architecture
+* Test Data (Strategy, Creation, Maintenance, Tools)
+* Test Metrics
+* Test Strategy-Test Automation
+* Test Plan-Test Automation
+* Automated Framework Architecture
+* Test Automation Reporting
+* Test Automation Metrics
+* Test Data (Strategy, Creation, Maintenance, Tools)

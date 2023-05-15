@@ -29,6 +29,7 @@ mycursor.execute(sql)
 
 print("----------CREATE disciplines------------------")
 sql = """CREATE TABLE disciplines (discipline_id INT AUTO_INCREMENT PRIMARY KEY, \
+        code VARCHAR(255), \
         discipline VARCHAR(255))"""
 mycursor.execute(sql)
 
@@ -59,6 +60,7 @@ sql = """CREATE TABLE employees ( \
         role_id INT, \
         title_id INT, \
         cost_alignment_id INT, \
+        cost_hour INT, \
         FOREIGN KEY (discipline_id) REFERENCES disciplines(discipline_id), \
         FOREIGN KEY (role_id) REFERENCES roles(role_id), \
         FOREIGN KEY (title_id) REFERENCES titles(title_id), \
@@ -140,6 +142,13 @@ mycursor.execute(sql)
 #         FOREIGN KEY (interviewer_id) REFERENCES employees(employee_id), \
 #         interview_round INT)"""
 # mycursor.execute(sql)
+
+print("----------CREATE skillset------------------")
+sql = """CREATE TABLE skillsets ( \
+        skillset_id INT AUTO_INCREMENT PRIMARY KEY, \
+        skillset_category VARCHAR(255), \
+        skillset VARCHAR(255))"""
+mycursor.execute(sql)
 
 mydb.commit()
 
