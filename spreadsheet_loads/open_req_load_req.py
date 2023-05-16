@@ -20,26 +20,29 @@ ws = wb.active
 # first, read through Overview and create new req record
 # if new, add to db
 for sheet in wb:
-    # print(sheet.title)
+    print(sheet.title)
     if sheet.title == 'Overview_1':
         client_id = 0
+        CompanyName = ''
         for row in sheet.values:
-            # print(row)
+            print('+++++++++++++++++CompanyName(id):' + str(CompanyName) +
+                  '(' + str(client_id) + ')+++++++++++++++')
+            print(row)
             if row[4] is not None:
                 JobID = row[4]
                 if JobID != 'Job ID':
                     # print('JobID =' + str(JobID))
-                    CompanyName = row[0]
-                    Priority = row[1]
-                    ProjectStage = row[2]
-                    JobTitle = row[3]
-                    Openings = row[5]
-
                     sql = "SELECT * FROM requisitions WHERE job_id = %s"
                     client_name = (JobID, )
                     mycursor.execute(sql, client_name)
                     myresult = mycursor.fetchall()
                     if len(myresult) == 0:
+                        CompanyName = row[0]
+                        Priority = row[1]
+                        ProjectStage = row[2]
+                        JobTitle = row[3]
+                        Openings = row[5]
+
                         if CompanyName is not None:
                             sql = "SELECT client_id FROM clients WHERE client = %s"
                             client_name = (CompanyName, )
@@ -47,6 +50,11 @@ for sheet in wb:
                             myresult = mycursor.fetchall()
                             for x in myresult:
                                 client_id = x[0]
+                            else:
+                                print('Client ' + CompanyName + 'does not exist')
+                        else:
+                            print('+++++++++++++++++CompanyName(id):' + str(CompanyName) +
+                                  '(' + str(client_id) + ')+++++++++++++++')
 
                         # print('client_id:' + str(client_id))
 
@@ -69,10 +77,20 @@ for sheet in wb:
                                 (JobID, client_id, Priority, ProjectStage, Openings, title_id)
                             ]
 
+                            print('+++++++++++++++++insert:' + str(JobID) + '|' +
+                                  str(client_id) + '|' +
+                                  Priority + '|' +
+                                  ProjectStage + '|' +
+                                  str(Openings) + '|' +
+                                  str(title_id))
                             mycursor.executemany(sql, val)
                             print('+++++++++++++++++JobID:' + str(JobID) + ' added to the db+++++++++++++++')
 
                             mydb.commit()
+
+                    else:
+                        print('+++++++++++++++++JobID:' + str(JobID) + ' already in db+++++++++++++++')
+
     else:
         for row in sheet.values:
             if row[4] is not None:
@@ -121,3 +139,7 @@ for sheet in wb:
                     print('@@@@@@@@@@@@@@@@@JobID:' + str(JobID) + ' updated in the db@@@@@@@@@@@@@@@')
 
                     mydb.commit()
+
+print('*******************************************************************************')
+print('***************FINISHED OPEN REQUISITION SPREADSHEET JOB LOAD & UPDATE**********************')
+print('*******************************************************************************')
