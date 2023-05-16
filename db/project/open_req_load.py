@@ -24,12 +24,12 @@ for sheet in wb:
     CompanyName_raw = sheet['A5'].value
     CompanyName = CompanyName_raw[14:]
     # print('CompanyName =' + CompanyName)
-    sql = "SELECT * FROM clients WHERE client_name = %s"
+    sql = "SELECT * FROM clients WHERE client = %s"
     client_name = (CompanyName, )
     mycursor.execute(sql, client_name)
     myresult = mycursor.fetchall()
     if len(myresult) == 0:
-        sql_client = "INSERT INTO clients (client_name) VALUES ('" + CompanyName + "')"
+        sql_client = "INSERT INTO clients (client) VALUES ('" + CompanyName + "')"
         mycursor.execute(sql_client)
         print('+++++++++++++++++' + CompanyName + ' added to the db+++++++++++++++')
 
@@ -124,3 +124,7 @@ for sheet in wb:
                         print('+++++++++++++++++' + first_name + ' ' + last_name + ' added to the db+++++++++++++++')
 
                         mydb.commit()
+
+print('*******************************************************************************')
+print('***************FINISHED OPEN REQUISITION SPREADSHEET LOAD**********************')
+print('*******************************************************************************')

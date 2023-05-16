@@ -90,7 +90,7 @@ mycursor.execute(sql)
 print("----------CREATE clients------------------")
 sql = """CREATE TABLE clients ( \
         client_id INT AUTO_INCREMENT PRIMARY KEY, \
-        client_name VARCHAR(255))"""
+        client VARCHAR(255))"""
 mycursor.execute(sql)
 
 print("----------CREATE requisition------------------")

@@ -41,7 +41,7 @@ for sheet in wb:
                     myresult = mycursor.fetchall()
                     if len(myresult) == 0:
                         if CompanyName is not None:
-                            sql = "SELECT client_id FROM clients WHERE client_name = %s"
+                            sql = "SELECT client_id FROM clients WHERE client = %s"
                             client_name = (CompanyName, )
                             mycursor.execute(sql, client_name)
                             myresult = mycursor.fetchall()
